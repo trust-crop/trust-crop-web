@@ -1,0 +1,57 @@
+name: 🚀 Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+# Grant GITHUB_TOKEN write access so it can push to the gh-pages branch
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Source ────────────────────────────────────────────────────────────
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Node.js ───────────────────────────────────────────────────────────
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # ── 3. Dependencies ──────────────────────────────────────────────────────
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      # ── 4. Static export ─────────────────────────────────────────────────────
+      # NEXT_PUBLIC_BASE_PATH scopes all assets/links to the gh-pages sub-path.
+      # Locally (.env) this is empty so dev/build works without a sub-path.
+      - name: 🏗️ Build static export
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /trust-crop-web
+
+      # ── 5. GitHub Pages ──────────────────────────────────────────────────────
+      # Pushes ./out to the gh-pages branch (created automatically if missing).
+      # GitHub Pages must be configured in repo Settings → Pages → gh-pages / root.
+      - name: 🚀 Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
+          # Keep a tidy, single-commit history on gh-pages
+          force_orphan: true
+          # Prevents Jekyll processing (important for Next.js _next/ assets)
+          enable_jekyll: false
+          commit_message: "deploy: ${{ github.sha }}"
+
