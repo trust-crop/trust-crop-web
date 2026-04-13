@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,45492,r=>{"use strict";var e=r.i(43476),o=r.i(70127);r.s(["PrimerBrandProvider",0,function({children:r,colorMode:i="dark"}){return(0,e.jsx)(o.ThemeProvider,{colorMode:i,children:r})}])}]);
