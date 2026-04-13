@@ -20,13 +20,8 @@ export const metadata: Metadata = {
   description:
     "Πλήρης έλεγχος παραγωγής, συσκευαστηρίου και αποθήκης σε μία ενιαία πλατφόρμα.",
   icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/icon-apple.png", type: "image/png" },
-    ],
-    shortcut: "/icon.svg",
+    icon: { url: "/icon.svg", type: "image/svg+xml" },
+    apple: { url: "/apple-icon.png", type: "image/png", sizes: "512x512" },
   },
 };
 
