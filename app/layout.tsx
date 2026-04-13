@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "TrustCrop — Ολοκληρωμένο Λογισμικό Αγροδιατροφικού Τομέα",
   description:
     "Πλήρης έλεγχος παραγωγής, συσκευαστηρίου και αποθήκης σε μία ενιαία πλατφόρμα.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/icon.svg" },
+    ],
+    shortcut: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
