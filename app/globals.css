@@ -66,3 +66,13 @@ section {
   section { padding-inline: 0; }
 }
 
+/*
+  Hero label uses a typing-cursor animation that sets `white-space: pre`,
+  forcing the long Greek label onto a single line. Allow it to wrap so it
+  doesn't overflow horizontally on narrow (mobile) viewports.
+*/
+[class*="TextCursorAnimation-text"][class*="Text--"] {
+  white-space: normal !important;
+  overflow-wrap: break-word;
+}
+

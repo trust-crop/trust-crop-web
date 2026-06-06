@@ -34,7 +34,7 @@ export default function Home() {
         <SubNav.Link href="#how-it-works">{nav.howItWorks}</SubNav.Link>
         <SubNav.Link href="#pricing">{nav.pricing}</SubNav.Link>
         <SubNav.Link href="https://github.com/trustcrop">{nav.github}</SubNav.Link>
-        <SubNav.Action href="#get-started">{nav.getStarted}</SubNav.Action>
+        <SubNav.Action href="https://app.trust-crop.org">{nav.getStarted}</SubNav.Action>
       </SubNav>
 
       {/* ── Hero ── */}
@@ -48,10 +48,7 @@ export default function Home() {
               {hero.heading[1]}
             </Hero.Heading>
             <Hero.Description>{hero.description}</Hero.Description>
-            <Hero.PrimaryAction href="#get-started">{hero.primaryAction}</Hero.PrimaryAction>
-            <Hero.SecondaryAction href="https://github.com/trustcrop">
-              {hero.secondaryAction}
-            </Hero.SecondaryAction>
+            <Hero.PrimaryAction href="https://app.trust-crop.org">{hero.primaryAction}</Hero.PrimaryAction>
           </Hero>
         </div>
       </div>
@@ -206,8 +203,6 @@ export default function Home() {
               </PricingOptions.Item>
             ))}
           </PricingOptions>
-
-          <PricingOptions.Footnote>{pricing.footnote}</PricingOptions.Footnote>
         </AnimationProvider>
       </Section>
 
