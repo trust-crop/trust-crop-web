@@ -38,19 +38,23 @@ export default function Home() {
       </SubNav>
 
       {/* ── Hero ── */}
-      <Hero align="center" enableAnimation>
-        <Hero.Label>{hero.label}</Hero.Label>
-        <Hero.Heading>
-          {hero.heading[0]}
-          <br />
-          {hero.heading[1]}
-        </Hero.Heading>
-        <Hero.Description>{hero.description}</Hero.Description>
-        <Hero.PrimaryAction href="#get-started">{hero.primaryAction}</Hero.PrimaryAction>
-        <Hero.SecondaryAction href="https://github.com/trustcrop">
-          {hero.secondaryAction}
-        </Hero.SecondaryAction>
-      </Hero>
+      <div style={{ backgroundImage: "url('/images/TOP%20BANER.jpg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+        <div style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
+          <Hero align="center" enableAnimation>
+            <Hero.Label>{hero.label}</Hero.Label>
+            <Hero.Heading>
+              {hero.heading[0]}
+              <br />
+              {hero.heading[1]}
+            </Hero.Heading>
+            <Hero.Description>{hero.description}</Hero.Description>
+            <Hero.PrimaryAction href="#get-started">{hero.primaryAction}</Hero.PrimaryAction>
+            <Hero.SecondaryAction href="https://github.com/trustcrop">
+              {hero.secondaryAction}
+            </Hero.SecondaryAction>
+          </Hero>
+        </div>
+      </div>
 
       {/* ── Feature pillars ── */}
       <Section id="features" backgroundColor="subtle">
@@ -82,12 +86,7 @@ export default function Home() {
           <River>
             <River.Visual>
               <Animate animate="slide-in-right">
-                <div style={{ height: 340, borderRadius: 12, background: "linear-gradient(135deg, #0d1117 0%, #161b22 40%, #1f2d3d 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="#58a6ff" strokeWidth="1.5" />
-                    <path d="M3 9h18M9 3v18" stroke="#58a6ff" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </div>
+                <Image src="/images/banner1.jpg" alt={howItWorks.rivers[0].heading} style={{ borderRadius: 12 }} />
               </Animate>
             </River.Visual>
             <River.Content>
@@ -102,12 +101,7 @@ export default function Home() {
           <River align="end">
             <River.Visual>
               <Animate animate="slide-in-left">
-                <div style={{ height: 340, borderRadius: 12, background: "linear-gradient(135deg, #0d1117 0%, #1a1a2e 40%, #16213e 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <circle cx="12" cy="12" r="9" stroke="#3fb950" strokeWidth="1.5" />
-                    <path d="M8 12l3 3 5-5" stroke="#3fb950" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <Image src="/images/traceability.jpg" alt={howItWorks.rivers[1].heading} style={{ borderRadius: 12 }} />
               </Animate>
             </River.Visual>
             <River.Content>
@@ -122,12 +116,7 @@ export default function Home() {
           <River>
             <River.Visual>
               <Animate animate="slide-in-right">
-                <div style={{ height: 340, borderRadius: 12, background: "linear-gradient(135deg, #0d1117 0%, #1a1a2e 40%, #0f3460 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="#d2a8ff" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#d2a8ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                <Image src="/images/devices.jpg" alt={howItWorks.rivers[2].heading} style={{ borderRadius: 12 }} />
               </Animate>
             </River.Visual>
             <River.Content>
