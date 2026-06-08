@@ -87,7 +87,7 @@
       },
       {
         "heading": "Standard",
-        "description": "Πλήρης νόμιμη συμμόρφωση",
+        "description": "Κάλυψη βασικών αναγκών",
         "price": {
           "monthly": { "symbol": "€", "value": "39", "trailing": "/ μήνα" },
           "annual": { "symbol": "€", "value": "390", "trailing": "/ έτος", "originalValue": "468" }
@@ -123,6 +123,20 @@
         ],
         "excluded": [],
         "primaryAction": { "text": "Επιλογή πακέτου", "href": "#get-started" }
+      },
+      {
+        "heading": "Προσαρμοσμένο",
+        "description": "",
+        "price": {
+          "monthly": { "value": "Κατόπιν επικοινωνίας" },
+          "annual": { "value": "Κατόπιν επικοινωνίας" }
+        },
+        "featureListHeading": "Περιλαμβάνει:",
+        "included": [
+          "Επικοινωνήστε μαζί μας για να προσαρμόσουμε το πλάνο στις δικές σας ανάγκες"
+        ],
+        "excluded": [],
+        "primaryAction": { "text": "Επικοινωνήστε μαζί μας", "href": "#get-started" }
       }
     ]
   },
