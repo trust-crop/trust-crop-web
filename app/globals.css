@@ -125,3 +125,38 @@ section {
   color: #ffffff !important;
 }
 
+/*
+  "Coming soon" overlay for pricing — blurs the numeric price text and floats
+  a pill badge centered over it, keeping the card layout height stable.
+*/
+.price-coming-soon {
+  position: relative;
+  text-shadow: 0 0 16px var(--brand-color-text-muted, rgba(140, 140, 140, 0.85));
+  user-select: none;
+}
+
+.price-coming-soon,
+.price-coming-soon * {
+  color: transparent !important;
+}
+
+.price-coming-soon::after {
+  content: "Coming soon";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  padding: var(--base-size-8, 0.5rem) var(--base-size-20, 1.25rem);
+  border-radius: 999px;
+  font-size: var(--brand-text-size-200, 1.0625rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--brand-color-text-default, #ffffff) !important;
+  text-shadow: none;
+  background: var(--brand-color-canvas-default, rgba(20, 20, 20, 0.85));
+  border: var(--brand-borderWidth-thin, 1px) solid var(--brand-color-border-muted, rgba(255, 255, 255, 0.18));
+  box-shadow: var(--brand-shadow-medium, 0 6px 20px rgba(0, 0, 0, 0.35));
+}
+
+

@@ -230,6 +230,7 @@ export default function Home() {
                   <PricingOptions.Heading>{plan.heading}</PricingOptions.Heading>
                   <PricingOptions.Description>{plan.description}</PricingOptions.Description>
                   <PricingOptions.Price
+                    className={"symbol" in price ? "price-coming-soon" : undefined}
                     currencyCode=""
                     currencySymbol={"symbol" in price ? price.symbol : ""}
                     trailingText={"trailing" in price ? price.trailing : undefined}
