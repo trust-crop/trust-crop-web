@@ -64,63 +64,65 @@
       "heading": "Ευέλικτα πλάνα για κάθε ανάγκη",
       "description": "Ξεκινήστε δωρεάν- Επιλέξτε πακέτο ανάλογα με τις ανάγκες\u00A0σας"
     },
+    "billingToggle": {
+      "monthly": "Μηνιαία",
+      "annual": "Ετήσια −17%"
+    },
     "plans": [
       {
-        "label": { "text": "Κοινότητα", "color": "blue" },
-        "heading": "Δωρεάν",
-        "description": "Για μεμονωμένους παραγωγούς και ανοιχτά αγροτικά έργα που ξεκινούν.",
-        "price": { "symbol": "€", "value": "0", "trailing": "/ μήνα" },
-        "featureListHeading": "Τι περιλαμβάνεται",
+        "heading": "Freemium",
+        "description": "Νέοι παραγωγοί / δοκιμή",
+        "price": {
+          "monthly": { "value": "Δωρεάν" },
+          "annual": { "value": "Δωρεάν" }
+        },
+        "featureListHeading": "Περιλαμβάνει:",
         "included": [
-          "100 καταχωρίσεις / ημέρα",
-          "Βασική παρακολούθηση καλλιεργειών",
-          "Πρόσβαση CLI",
-          "Υποστήριξη κοινότητας"
-        ],
-        "excluded": [
-          "Οπτικοποίηση δεδομένων",
-          "Θέσεις ομάδας",
-          "Εγγύηση SLA"
-        ],
-        "primaryAction": { "text": "Ξεκινήστε δωρεάν", "href": "#get-started" }
-      },
-      {
-        "label": { "text": "Πιο δημοφιλές", "color": "green" },
-        "heading": "Pro",
-        "description": "Για ομάδες παραγωγών και συνεταιρισμούς που χρειάζονται πλήρη εργαλεία συνεργασίας.",
-        "price": { "symbol": "€", "value": "500", "trailing": "/ μήνα" },
-        "featureListHeading": "Όλα του Δωρεάν πακέτου, και επιπλέον",
-        "included": [
-          "Απεριόριστες καταχωρίσεις",
-          "Προηγμένη ανάλυση παραγωγής",
-          "Διαχείριση συσκευαστηρίου & αποθήκης",
-          "REST API + mobile εφαρμογή",
-          "Έως 5 θέσεις ομάδας",
-          "Υποστήριξη ηλεκτρονικού ταχυδρομείου"
-        ],
-        "excluded": [
-          "Εγκατάσταση on-premises"
-        ],
-        "primaryAction":   { "text": "Δοκιμή 14 ημερών",    "href": "#get-started"   },
-        "secondaryAction": { "text": "Όλες οι λειτουργίες", "href": "#how-it-works"  }
-      },
-      {
-        "label": { "text": "Επιχείρηση", "color": "purple" },
-        "heading": "Enterprise",
-        "description": "Για μεγάλες επιχειρήσεις και οργανισμούς που απαιτούν συμμόρφωση και αποκλειστική υποστήριξη.",
-        "price": { "value": "Προσαρμοσμένο", "trailing": "— επικοινωνήστε μαζί μας" },
-        "featureListHeading": "Όλα του Pro, και επιπλέον",
-        "included": [
-          "Εγκατάσταση on-premises & air-gapped",
-          "Προσαρμοσμένη εκπαίδευση μοντέλου",
-          "Απεριόριστες θέσεις ομάδας",
-          "SLA 99,9 % uptime",
-          "Αποκλειστικός μηχανικός υποστήριξης",
-          "Έγγραφα GDPR & ISO"
+          "Αναζήτηση στο μητρώο φυτοπροστατευτικών",
+          "Αγαπημένα προϊόντα",
+          "Υποβολή αιτημάτων υποστήριξης"
         ],
         "excluded": [],
-        "primaryAction":   { "text": "Επικοινωνήστε με πωλήσεις", "href": "mailto:enterprise@trust-crop.org" },
-        "secondaryAction": { "text": "Έγγραφα ασφαλείας",         "href": "#get-started" }
+        "primaryAction": { "text": "Τρέχον πακέτο", "href": "#get-started" }
+      },
+      {
+        "heading": "Standard",
+        "description": "Πλήρης νόμιμη συμμόρφωση",
+        "price": {
+          "monthly": { "symbol": "€", "value": "39", "trailing": "/ μήνα" },
+          "annual": { "symbol": "€", "value": "390", "trailing": "/ έτος", "originalValue": "468" }
+        },
+        "featureListHeading": "Περιλαμβάνει:",
+        "included": [
+          "Όλα του Freemium",
+          "Διαχείριση ομάδας έως 30 παραγωγών",
+          "Ημερολόγια ψεκασμών",
+          "Ημερολόγια λιπάνσεων",
+          "Αυτόματα PHI Alerts",
+          "Καταγραφή 50 Αγορών ή Πωλήσεων / Μήνα"
+        ],
+        "excluded": [],
+        "primaryAction": { "text": "Επιλογή πακέτου", "href": "#get-started" }
+      },
+      {
+        "label": { "text": "Προτεινόμενο", "color": "green" },
+        "heading": "Premium",
+        "description": "Επαγγελματίες με ανάγκη AI",
+        "price": {
+          "monthly": { "symbol": "€", "value": "99", "trailing": "/ μήνα" },
+          "annual": { "symbol": "€", "value": "990", "trailing": "/ έτος", "originalValue": "1188" }
+        },
+        "featureListHeading": "Περιλαμβάνει:",
+        "included": [
+          "Όλα του Standard",
+          "AI Σύμβουλος φυτοπροστασίας (chat)",
+          "Διαχείριση ομάδας απεριόριστων παραγωγών",
+          "Καταγραφή απεριόριστων Αγορών & Πωλήσεων",
+          "Προηγμένες αναφορές & στατιστικά",
+          "Προτεραιότητα στην υποστήριξη"
+        ],
+        "excluded": [],
+        "primaryAction": { "text": "Επιλογή πακέτου", "href": "#get-started" }
       }
     ]
   },
@@ -137,10 +139,7 @@
       { "text": "GitHub",          "href": "https://github.com/trustcrop", "external": true }
     ],
     "copyright": "© {year} TrustCrop contributors.",
-    "license": {
-      "text": "MIT License",
-      "href": "https://github.com/trustcrop/trust-crop-web/blob/main/LICENSE"
-    }
+    "poweredBy": "powered by nxo"
   }
 }
 

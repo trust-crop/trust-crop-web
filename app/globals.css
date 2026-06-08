@@ -21,6 +21,17 @@
   }
 }
 
+/* Explicit theme selection via the SubNav toggle overrides the OS preference */
+:root[data-color-mode="light"] {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+:root[data-color-mode="dark"] {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -74,5 +85,43 @@ section {
 [class*="TextCursorAnimation-text"][class*="Text--"] {
   white-space: normal !important;
   overflow-wrap: break-word;
+}
+
+/* Hide the GitHub logo/mark rendered by Primer Brand MinimalFooter */
+[class*="MinimalFooter-module__Footer__logomarks"] {
+  display: none !important;
+}
+[class*="Footer__logomarks"] {
+  display: none !important;
+}
+
+/* Footer has only the copyright left — let it fill the row and center */
+[class*="Footer__copyright"] {
+  flex: 1 1 100% !important;
+}
+
+/*
+  Keep the theme toggle grouped with the "Ξεκινήστε" Action on the right.
+  The toggle's <li> takes the auto margin (pushing it + the Action right),
+  and the Action's <li> sits immediately after it with no extra margin.
+*/
+[class*="links-overlay"] li:has(a[aria-label*="θέμα"]) {
+  margin-inline-start: auto !important;
+  margin-inline-end: 1.5rem !important;
+}
+
+[class*="SubNav__action-container"] {
+  margin-inline-start: 0 !important;
+}
+
+/*
+  The Hero sits on a dark image overlay, so its text must stay white in
+  both light and dark mode (otherwise light mode renders it black/grey
+  and unreadable).
+*/
+.hero-overlay [class*="Hero-heading"],
+.hero-overlay [class*="Hero-description"],
+.hero-overlay [class*="Hero-label"] {
+  color: #ffffff !important;
 }
 

@@ -18,11 +18,16 @@ import {
   AnimationProvider,
   Animate,
 } from "@primer/react-brand";
+import { useState } from "react";
+import { SunIcon, MoonIcon } from "@primer/octicons-react";
+import { useColorScheme } from "./components/PrimerBrandProvider";
 import content from "./content/el.json";
 
 const { nav, hero, features, howItWorks, stats, pricing, footer } = content;
 
 export default function Home() {
+  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+  const { colorScheme, toggleColorScheme } = useColorScheme();
   return (
     <div className="px-4">
       {/* ── Navigation ── */}
@@ -33,13 +38,22 @@ export default function Home() {
         <SubNav.Link href="#features">{nav.features}</SubNav.Link>
         <SubNav.Link href="#how-it-works">{nav.howItWorks}</SubNav.Link>
         <SubNav.Link href="#pricing">{nav.pricing}</SubNav.Link>
-        <SubNav.Link href="https://github.com/trustcrop">{nav.github}</SubNav.Link>
+        <SubNav.Link
+          href="#"
+          onClick={(event) => {
+            event.preventDefault();
+            toggleColorScheme();
+          }}
+          aria-label={colorScheme === "dark" ? "Φωτεινό θέμα" : "Σκοτεινό θέμα"}
+        >
+          {colorScheme === "dark" ? <SunIcon size={16} /> : <MoonIcon size={16} />}
+        </SubNav.Link>
         <SubNav.Action href="https://app.trust-crop.org">{nav.getStarted}</SubNav.Action>
       </SubNav>
 
       {/* ── Hero ── */}
       <div style={{ backgroundImage: "url('/images/TOP%20BANER.jpg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
-        <div style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
+        <div className="hero-overlay" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
           <Hero align="center" enableAnimation>
             <Hero.Label>{hero.label}</Hero.Label>
             <Hero.Heading>
@@ -157,51 +171,100 @@ export default function Home() {
             <SectionIntro.Description>{pricing.sectionIntro.description}</SectionIntro.Description>
           </SectionIntro>
 
-          <PricingOptions variant="cards-gradient" align="center">
-            {pricing.plans.map((plan, i) => (
-              <PricingOptions.Item
-                key={plan.heading}
-                animate={{ variant: "slide-in-up", delay: i * 120 }}
-              >
-                <PricingOptions.Label color={plan.label.color as "blue" | "green" | "purple"}>
-                  {plan.label.text}
-                </PricingOptions.Label>
-                <PricingOptions.Heading>{plan.heading}</PricingOptions.Heading>
-                <PricingOptions.Description>{plan.description}</PricingOptions.Description>
-                <PricingOptions.Price
-                  currencyCode=""
-                  currencySymbol={plan.price.symbol ?? ""}
-                  trailingText={plan.price.trailing}
+          <div
+            role="tablist"
+            aria-label={pricing.sectionIntro.label}
+            style={{
+              display: "flex",
+              width: "fit-content",
+              gap: "var(--base-size-4)",
+              margin: "0 auto var(--base-size-32)",
+              padding: "var(--base-size-4)",
+              border: "var(--brand-borderWidth-thin) solid var(--brand-color-border-default)",
+              borderRadius: "var(--brand-borderRadius-medium)",
+              background: "var(--brand-color-canvas-subtle)",
+            }}
+          >
+            {(["monthly", "annual"] as const).map((option) => {
+              const selected = billing === option;
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  role="tab"
+                  aria-selected={selected}
+                  onClick={() => setBilling(option)}
+                  style={{
+                    cursor: "pointer",
+                    border: "none",
+                    borderRadius: "var(--brand-borderRadius-small)",
+                    padding: "var(--base-size-8) var(--base-size-16)",
+                    font: "inherit",
+                    fontWeight: 600,
+                    color: selected
+                      ? "var(--brand-color-text-default)"
+                      : "var(--brand-color-text-muted)",
+                    background: selected ? "var(--brand-color-canvas-default)" : "transparent",
+                    boxShadow: selected ? "var(--brand-shadow-small)" : "none",
+                  }}
                 >
-                  {plan.price.value}
-                </PricingOptions.Price>
-                <PricingOptions.FeatureList hasDivider>
-                  {[
-                    <PricingOptions.FeatureListHeading key="heading">
-                      {plan.featureListHeading}
-                    </PricingOptions.FeatureListHeading>,
-                    ...plan.included.map((item) => (
-                      <PricingOptions.FeatureListItem key={item}>
-                        {item}
-                      </PricingOptions.FeatureListItem>
-                    )),
-                    ...plan.excluded.map((item) => (
-                      <PricingOptions.FeatureListItem key={`x-${item}`} variant="excluded">
-                        {item}
-                      </PricingOptions.FeatureListItem>
-                    )),
-                  ]}
-                </PricingOptions.FeatureList>
-                <PricingOptions.PrimaryAction as="a" href={plan.primaryAction.href}>
-                  {plan.primaryAction.text}
-                </PricingOptions.PrimaryAction>
-                {"secondaryAction" in plan && plan.secondaryAction && (
-                  <PricingOptions.SecondaryAction as="a" href={plan.secondaryAction.href}>
-                    {plan.secondaryAction.text}
-                  </PricingOptions.SecondaryAction>
-                )}
-              </PricingOptions.Item>
-            ))}
+                  {pricing.billingToggle[option]}
+                </button>
+              );
+            })}
+          </div>
+
+          <PricingOptions variant="cards-gradient" align="center">
+            {pricing.plans.map((plan, i) => {
+              const price = plan.price[billing];
+              return (
+                <PricingOptions.Item
+                  key={plan.heading}
+                  animate={{ variant: "slide-in-up", delay: i * 120 }}
+                >
+                  {"label" in plan && plan.label && (
+                    <PricingOptions.Label color={plan.label.color as "blue" | "green" | "purple"}>
+                      {plan.label.text}
+                    </PricingOptions.Label>
+                  )}
+                  <PricingOptions.Heading>{plan.heading}</PricingOptions.Heading>
+                  <PricingOptions.Description>{plan.description}</PricingOptions.Description>
+                  <PricingOptions.Price
+                    currencyCode=""
+                    currencySymbol={"symbol" in price ? price.symbol : ""}
+                    trailingText={"trailing" in price ? price.trailing : undefined}
+                    originalPrice={"originalValue" in price ? price.originalValue : undefined}
+                  >
+                    {price.value}
+                  </PricingOptions.Price>
+                  <PricingOptions.FeatureList hasDivider>
+                    {[
+                      <PricingOptions.FeatureListHeading key="heading">
+                        {plan.featureListHeading}
+                      </PricingOptions.FeatureListHeading>,
+                      ...plan.included.map((item) => (
+                        <PricingOptions.FeatureListItem key={item}>
+                          {item}
+                        </PricingOptions.FeatureListItem>
+                      )),
+                      ...plan.excluded.map((item) => (
+                        <PricingOptions.FeatureListItem key={`x-${item}`} variant="excluded">
+                          {item}
+                        </PricingOptions.FeatureListItem>
+                      )),
+                    ]}
+                  </PricingOptions.FeatureList>
+                  <PricingOptions.PrimaryAction as="a" href={plan.primaryAction.href}>
+                    {plan.primaryAction.text}
+                  </PricingOptions.PrimaryAction>
+                  {"secondaryAction" in plan && plan.secondaryAction && (
+                    <PricingOptions.SecondaryAction as="a" href={plan.secondaryAction.href}>
+                      {plan.secondaryAction.text}
+                    </PricingOptions.SecondaryAction>
+                  )}
+                </PricingOptions.Item>
+              );
+            })}
           </PricingOptions>
         </AnimationProvider>
       </Section>
@@ -210,27 +273,12 @@ export default function Home() {
       <MinimalFooter
         socialLinks={false}
         copyrightStatement={
-          <>
+          <span style={{ display: "block", width: "100%", textAlign: "center" }}>
             {footer.copyright.replace("{year}", String(new Date().getFullYear()))}{" "}
-            <MinimalFooter.Link href={footer.license.href}>
-              {footer.license.text}
-            </MinimalFooter.Link>
-            .
-          </>
+            {footer.poweredBy}
+          </span>
         }
-      >
-        {footer.links.map((link) =>
-          link.external ? (
-            <MinimalFooter.Link key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
-              {link.text}
-            </MinimalFooter.Link>
-          ) : (
-            <MinimalFooter.Link key={link.href} href={link.href}>
-              {link.text}
-            </MinimalFooter.Link>
-          )
-        )}
-      </MinimalFooter>
+      />
     </div>
   );
 }
