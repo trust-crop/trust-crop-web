@@ -38,6 +38,7 @@ export default function Home() {
         <SubNav.Link href="#features">{nav.features}</SubNav.Link>
         <SubNav.Link href="#how-it-works">{nav.howItWorks}</SubNav.Link>
         <SubNav.Link href="#pricing">{nav.pricing}</SubNav.Link>
+        <SubNav.Link href="https://app.trust-crop.org/support">{nav.contact}</SubNav.Link>
         <SubNav.Link
           href="#"
           onClick={(event) => {
