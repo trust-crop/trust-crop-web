@@ -259,11 +259,6 @@ export default function Home() {
                   <PricingOptions.PrimaryAction as="a" href={plan.primaryAction.href}>
                     {plan.primaryAction.text}
                   </PricingOptions.PrimaryAction>
-                  {"secondaryAction" in plan && plan.secondaryAction && (
-                    <PricingOptions.SecondaryAction as="a" href={plan.secondaryAction.href}>
-                      {plan.secondaryAction.text}
-                    </PricingOptions.SecondaryAction>
-                  )}
                 </PricingOptions.Item>
               );
             })}
