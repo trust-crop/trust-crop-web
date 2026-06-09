@@ -1,7 +1,24 @@
 @import "tailwindcss";
+/* features section refresh */
+/* header fade */
+/* glow divider v2 */
+/* stats wash fade-in v3 */
+/* stats wash transparency v4 */
+/* stats transparent bg v5 */
+/* stats top seam fade v6 */
+/* stats center text v7 */
+/* light mode seam fix v8 */
+/* curve up v9 */
+/* banner fade light v10 */
+/* remove banner top fade v11 */
+/* banner bottom seam v12 */
+/* lift cta button v13 */
+/* lift cta tune v14 */
+/* pricing hover lift v15 */
 
 :root {
   --background: #ffffff;
+  --background-rgb: 255, 255, 255;
   --foreground: #171717;
   /* Fallback — next/font overrides this with the optimised Inter subset at runtime */
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -17,6 +34,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
+    --background-rgb: 10, 10, 10;
     --foreground: #ededed;
   }
 }
@@ -24,11 +42,13 @@
 /* Explicit theme selection via the SubNav toggle overrides the OS preference */
 :root[data-color-mode="light"] {
   --background: #ffffff;
+  --background-rgb: 255, 255, 255;
   --foreground: #171717;
 }
 
 :root[data-color-mode="dark"] {
   --background: #0a0a0a;
+  --background-rgb: 10, 10, 10;
   --foreground: #ededed;
 }
 
@@ -115,6 +135,40 @@ section {
 }
 
 /*
+  Mobile-only theme toggle, positioned next to the SubNav hamburger button.
+  On desktop the toggle lives inside the nav links; on narrow viewports those
+  links collapse into a closed overlay, so we surface a standalone toggle
+  pinned to the top-right, just left of the menu button.
+*/
+.mobile-theme-toggle {
+  display: none;
+}
+
+@media screen and (max-width: 63.24rem) {
+  .mobile-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 19px;
+    right: 60px;
+    z-index: 9999;
+    width: 32px;
+    height: 32px;
+    color: var(--brand-color-text-default);
+    background-color: var(--brand-SubNav-color-link-bgColor);
+    border: none;
+    border-radius: var(--brand-borderRadius-full);
+    cursor: pointer;
+  }
+
+  /* Hide the duplicate theme toggle inside the collapsed menu on mobile */
+  [class*="links-overlay"] li:has(a[aria-label*="θέμα"]) {
+    display: none !important;
+  }
+}
+
+/*
   The Hero sits on a dark image overlay, so its text must stay white in
   both light and dark mode (otherwise light mode renders it black/grey
   and unreadable).
@@ -124,6 +178,164 @@ section {
 .hero-overlay [class*="Hero-label"] {
   color: #ffffff !important;
 }
+
+/*
+  Fade the bottom of the hero banner into the next section's background so the
+  image dissolves smoothly instead of ending with a hard edge.
+*/
+.hero-banner {
+  position: relative;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 45%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--brand-color-canvas-subtle) 100%
+  );
+}
+
+/* Lift only the hero CTA button above the bottom fade onto a lighter area */
+.hero-overlay [class*="Hero-actions"] {
+  position: relative;
+  z-index: 2;
+  transform: translateY(-1.5rem);
+}
+
+/*
+  Feature cards — wrap each Pillar in an elevated, bordered card with a subtle
+  gradient and hover lift to make the "features" section more engaging.
+*/
+.feature-card {
+  height: 100%;
+  padding: var(--base-size-32, 2rem) var(--base-size-28, 1.75rem);
+  border-radius: var(--brand-borderRadius-large, 16px);
+  border: var(--brand-borderWidth-thin, 1px) solid var(--brand-color-border-muted, rgba(255, 255, 255, 0.1));
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(46, 160, 67, 0.08) 0%, transparent 55%),
+    var(--brand-color-canvas-default, #0d1117);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+  transition:
+    transform 0.25s var(--brand-animation-easing-default, ease),
+    border-color 0.25s var(--brand-animation-easing-default, ease),
+    box-shadow 0.25s var(--brand-animation-easing-default, ease);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brand-color-border-default, rgba(255, 255, 255, 0.24));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.feature-card [class*="Pillar-module__Pillar__icon"] {
+  margin-block-end: var(--base-size-16, 1rem);
+}
+
+/*
+  Soften the hard edge where the "subtle" features section meets the darker
+  section below it by fading its background into the default canvas color.
+*/
+#features {
+  position: relative;
+}
+
+#features::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--background) 100%
+  );
+}
+
+/*
+  Glowing curved divider at the top of the stats section — a gentle green arc
+  with a soft glow, inspired by the Netflix billboard curve.
+*/
+#stats {
+  position: relative;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Faded green wash filling the stats section */
+#stats::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--background) 0%,
+    rgba(var(--background-rgb), 0.6) 4%,
+    transparent 9%,
+    rgba(63, 185, 80, 0.07) 22%,
+    rgba(46, 160, 67, 0.035) 45%,
+    transparent 78%,
+    var(--background) 100%
+  );
+}
+
+.glow-divider {
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 260px;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-bottom: 2px solid #57d364;
+  pointer-events: none;
+  box-shadow:
+    0 1px 10px 1px rgba(87, 211, 100, 0.85),
+    0 3px 36px 4px rgba(63, 185, 80, 0.55),
+    0 6px 90px 10px rgba(46, 160, 67, 0.35);
+}
+
+.glow-divider::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 5px;
+  border-radius: 50%;
+  background: #aeffb8;
+  filter: blur(3px);
+  opacity: 0.95;
+}
+
+/* Center the stat numbers and labels within each column */
+#stats [class*="Statistic-module__Statistic"] {
+  text-align: center;
+  align-items: center;
+}
+
+/* Raise pricing cards on hover for an interactive lift effect */
+#pricing [class*="PricingOptions-module__PricingOptions__item"] {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#pricing [class*="PricingOptions-module__PricingOptions__item"]:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
 
 /*
   "Coming soon" overlay for pricing — blurs the numeric price text and floats

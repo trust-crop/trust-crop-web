@@ -19,17 +19,29 @@ import {
   Animate,
 } from "@primer/react-brand";
 import { useState } from "react";
-import { SunIcon, MoonIcon } from "@primer/octicons-react";
+import {
+  SunIcon,
+  MoonIcon,
+  GraphIcon,
+  PackageIcon,
+  PulseIcon,
+} from "@primer/octicons-react";
 import { useColorScheme } from "./components/PrimerBrandProvider";
 import content from "./content/el.json";
 
 const { nav, hero, features, howItWorks, stats, pricing, footer } = content;
 
+const pillarIcons = [
+  { icon: <GraphIcon size={24} />, color: "green" as const },
+  { icon: <PackageIcon size={24} />, color: "blue" as const },
+  { icon: <PulseIcon size={24} />, color: "purple" as const },
+];
+
 export default function Home() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
   const { colorScheme, toggleColorScheme } = useColorScheme();
   return (
-    <div className="px-4">
+    <div style={{ position: "relative" }}>
       {/* ── Navigation ── */}
       <SubNav>
         <SubNav.Heading href="/">
@@ -52,8 +64,19 @@ export default function Home() {
         <SubNav.Action href="https://app.trust-crop.org">{nav.getStarted}</SubNav.Action>
       </SubNav>
 
+      {/* Mobile-only theme toggle, sits next to the hamburger menu button */}
+      <button
+        type="button"
+        className="mobile-theme-toggle"
+        onClick={toggleColorScheme}
+        aria-label={colorScheme === "dark" ? "Φωτεινό θέμα" : "Σκοτεινό θέμα"}
+      >
+        {colorScheme === "dark" ? <SunIcon size={16} /> : <MoonIcon size={16} />}
+      </button>
+
+
       {/* ── Hero ── */}
-      <div style={{ backgroundImage: "url('/images/TOP%20BANER.jpg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
+      <div className="hero-banner" style={{ backgroundImage: "url('/images/TOP%20BANER.jpg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
         <div className="hero-overlay" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}>
           <Hero align="center" enableAnimation>
             <Hero.Label>{hero.label}</Hero.Label>
@@ -82,10 +105,16 @@ export default function Home() {
                 key={pillar.heading}
                 span={{ xsmall: 12, medium: 6, large: 4 }}
               >
-                <Pillar animate={{ variant: "slide-in-up", delay: i * 150 }}>
-                  <Pillar.Heading>{pillar.heading}</Pillar.Heading>
-                  <Pillar.Description>{pillar.description}</Pillar.Description>
-                </Pillar>
+                <div className="feature-card">
+                  <Pillar animate={{ variant: "slide-in-up", delay: i * 150 }}>
+                    <Pillar.Icon
+                      icon={pillarIcons[i].icon}
+                      color={pillarIcons[i].color}
+                    />
+                    <Pillar.Heading>{pillar.heading}</Pillar.Heading>
+                    <Pillar.Description>{pillar.description}</Pillar.Description>
+                  </Pillar>
+                </div>
               </Grid.Column>
             ))}
           </Grid>
@@ -143,7 +172,8 @@ export default function Home() {
       </Section>
 
       {/* ── Social proof stats ── */}
-      <Section backgroundColor="subtle">
+      <Section id="stats" backgroundColor="default">
+        <div className="glow-divider" aria-hidden="true" />
         <AnimationProvider animationTrigger="on-visible" runOnce autoStaggerChildren staggerDelayIncrement={120}>
           <Grid enableGutters>
             {stats.map((stat) => (
@@ -271,8 +301,9 @@ export default function Home() {
         socialLinks={false}
         copyrightStatement={
           <span style={{ display: "block", width: "100%", textAlign: "center" }}>
-            {footer.copyright.replace("{year}", String(new Date().getFullYear()))}{" "}
-            {footer.poweredBy}
+            {footer.copyright.replace("{year}", String(new Date().getFullYear()))}{" · "}
+            Powered by{" "}
+            <span style={{ fontWeight: 700, color: "#8957e5" }}>NXO</span>
           </span>
         }
       />

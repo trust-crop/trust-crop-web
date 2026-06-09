@@ -81,6 +81,7 @@
         "included": [
           "Αναζήτηση στο μητρώο φυτοπροστατευτικών",
           "Αγαπημένα προϊόντα",
+          "Πρόγνωση καιρού 7 ημερών",
           "Υποβολή αιτημάτων υποστήριξης"
         ],
         "excluded": [],
@@ -103,7 +104,7 @@
           "Καταγραφή 50 Αγορών ή Πωλήσεων / Μήνα"
         ],
         "excluded": [],
-        "primaryAction": { "text": "Επιλογή πακέτου", "href": "#get-started" }
+        "primaryAction": { "text": "Επιλογή πακέτου", "href": "https://app.trust-crop.org/pricing" }
       },
       {
         "label": { "text": "Προτεινόμενο", "color": "green" },
@@ -119,11 +120,12 @@
           "AI Σύμβουλος φυτοπροστασίας (chat)",
           "Διαχείριση ομάδας απεριόριστων παραγωγών",
           "Καταγραφή απεριόριστων Αγορών & Πωλήσεων",
+          "Ειδοποιήσεις email για ενημερώσεις φαρμάκων",
           "Προηγμένες αναφορές & στατιστικά",
           "Προτεραιότητα στην υποστήριξη"
         ],
         "excluded": [],
-        "primaryAction": { "text": "Επιλογή πακέτου", "href": "#get-started" }
+        "primaryAction": { "text": "Επιλογή πακέτου", "href": "https://app.trust-crop.org/pricing" }
       },
       {
         "heading": "Προσαρμοσμένο",
@@ -153,8 +155,8 @@
       { "text": "Πώς λειτουργεί", "href": "#how-it-works"              },
       { "text": "GitHub",          "href": "https://github.com/trustcrop", "external": true }
     ],
-    "copyright": "© {year} TrustCrop contributors.",
-    "poweredBy": "powered by nxo"
+    "copyright": "© {year} TrustCrop",
+    "poweredBy": "Powered by NXO"
   }
 }
 
